@@ -1,0 +1,26 @@
+{
+    "name": "user/html",
+    "authors": [
+        {
+            "name": "Vladislav Goncharov",
+            "email": "vladg782@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Models\\" : "models",
+            "App\\" : ["", "controllers"],
+            "Controllers\\" : "controllers",
+            "Views\\" : "views"
+        },
+        "classmap": [
+            "models/",
+            "controllers/",
+            "views/",
+            ""
+        ]
+    },
+    "require": {
+        "twbs/bootstrap" : "4.4.1"
+    }
+}
