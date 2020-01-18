@@ -25,7 +25,7 @@ abstract class BaseController
         return $this->postParams;
     }
 
-    public function view($viewName)
+    public function view($viewName, $data = [])
     {
         $dir = 'views/';
         $filename = $dir . $viewName . '.html';

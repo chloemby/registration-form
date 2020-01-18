@@ -13,33 +13,29 @@
 <body class="login-page">
 <main>
     <div class="login-block">
-        <h1>Введите свои данные</h1>
-        <form action="views/NotFound.html">
+        <h1 id="data">Введите свои данные</h1>
+        <form action="user/auth" name="auth" onclick="return formValidation();">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input type="text" class="form-control" placeholder="Логин">
+                    <input id="login" type="text" class="form-control" placeholder="Логин">
                 </div>
             </div>
-
             <hr class="hr-xs">
-
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-                    <input type="password" class="form-control" placeholder="Пароль">
+                    <input id="password" type="password" class="form-control" placeholder="Пароль">
                 </div>
             </div>
-
             <button class="btn btn-primary btn-block" type="submit">Войти</button>
-
         </form>
-    </div>
-
-    <div class="login-links">
-        <button class="btn btn-primary btn-block" type="submit">Регистрация</button>
+        <div class="login-links">
+            <a href="user/registration"><button class="btn btn-primary btn-block register" type="submit">Регистрация</button></a>
+        </div>
     </div>
 </main>
 
+<script src="views/js/index.js"></script>
 </body>
 </html>

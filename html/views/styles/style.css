@@ -6,7 +6,7 @@
 {
   width:100%;
   max-width:460px;
-  margin:8% auto 5%
+  margin:4% auto 4%;
 }
 .login-block
 {
@@ -40,7 +40,7 @@
   margin-top:15px;
   margin-bottom:15px;
 }
-.login-block .form-control,.login-block .form-control:focus,.login-block .input-group-addon,.login-block .input-group-addon:focus
+.login-block .form-control,.login-block .form-control:focus,.login-block .input-group-addon,.login-block .input-group-addon:focus button
 {
   background-color:transparent;
   border:none;
@@ -110,6 +110,7 @@
   color:#29aafe;
   opacity:1
 }
+
 @media (max-width:767px)
 {
   .login-page main
@@ -124,5 +125,16 @@
   }
   .login-block{padding:20px}
 }
+.form-group
+{
+  margin: 4% auto 4%;
+}
+
+.register
+{
+  font-size:16px;
+}
+
+
 
 

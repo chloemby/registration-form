@@ -16,7 +16,7 @@ class Router
 
     public function delegate()
     {
-        $pattern = '/^\/(\w+)\/(\w+)$/';
+        $pattern = '/^\/(\w+)?\/(\w+)$/';
         preg_match_all($pattern, $this->path, $matches);
         $controller = $matches[1][0] ? ucfirst($matches[1][0]) : 'Index';
         $controller .= 'Controller';
