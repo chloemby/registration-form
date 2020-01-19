@@ -6,8 +6,8 @@ namespace Controllers;
 
 abstract class BaseController
 {
-    private $getParams = [];
-    private $postParams = [];
+    private $getParams;
+    private $postParams;
 
     public function __construct($getParams, $postParams)
     {
@@ -15,14 +15,27 @@ abstract class BaseController
         $this->postParams = $postParams;
     }
 
-    public function getQuery()
+    public function getQuery(string $name, $defaultValue = '')
     {
-        return $this->getParams;
+        if (isset($this->getParams[$name])) {
+            return $this->getParams[$name];
+        }
+        return $defaultValue;
     }
 
-    public function getPost()
+    public function getPost(string $name, $defaultValue = '')
     {
-        return $this->postParams;
+        if (isset($this->postParams[$name])) {
+            return $this->postParams[$name];
+        }
+        return $defaultValue;
+    }
+
+    public function getUploadedFiles()
+    {
+        $file = $_FILES['file'];
+        var_dump($file);
+        return null;
     }
 
     public function view($viewName, $data = [])

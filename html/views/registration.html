@@ -14,35 +14,35 @@
 <main>
     <div class="login-block">
         <h1 id="data">Введите свои данные</h1>
-        <form action="user/register" name="data" enctype="multipart/form-data" method="post" onclick="return formValidation();">
+        <form action="user/create" name="data" enctype="multipart/form-data" method="post" onclick="return formValidation();">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input id="login" type="text" class="form-control" placeholder="Логин">
+                    <input id="login" type="text" class="form-control" placeholder="Логин" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-                    <input id="password" type="password" class="form-control" placeholder="Пароль">
+                    <input id="password" type="password" class="form-control" placeholder="Пароль" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-                    <input id="confirmPassword" type="password" class="form-control" placeholder="Введите пароль еще раз">
+                    <input id="confirmPassword" type="password" class="form-control" placeholder="Введите пароль еще раз" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input id="name" type="text" class="form-control" placeholder="Имя">
+                    <input id="name" type="text" class="form-control" placeholder="Имя" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input id="surname" type="text" class="form-control" placeholder="Фамилия">
+                    <input id="surname" type="text" class="form-control" placeholder="Фамилия" required>
                 </div>
             </div>
             <div class="form-group">
@@ -66,7 +66,7 @@
         </form>
     </div>
 </main>
-<script src="/views/js/registration.js"></script>
 
+<script src="/views/js/registration.js"></script>
 </body>
 </html>
