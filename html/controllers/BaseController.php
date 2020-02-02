@@ -15,7 +15,7 @@ abstract class BaseController
         $this->postParams = $postParams;
     }
 
-    public function getQuery(string $name, $defaultValue = '')
+    public function getQuery(string $name, $defaultValue = null)
     {
         if (isset($this->getParams[$name])) {
             return $this->getParams[$name];
@@ -23,7 +23,7 @@ abstract class BaseController
         return $defaultValue;
     }
 
-    public function getPost(string $name, $defaultValue = '')
+    public function getPost(string $name, $defaultValue = null)
     {
         if (isset($this->postParams[$name])) {
             return $this->postParams[$name];
@@ -33,8 +33,9 @@ abstract class BaseController
 
     public function getUploadedFiles()
     {
-        $file = $_FILES['file'];
-        var_dump($file);
+        if (isset($_FILES) || count($_FILES) > 0) {
+            return $_FILES;
+        }
         return null;
     }
 
@@ -47,6 +48,16 @@ abstract class BaseController
         } else {
             include $filename;
         }
+    }
 
+    public function sendResponse(int $code, string $message, $data = [])
+    {
+        http_response_code($code);
+        $data = [
+            'status' => $code,
+            'message' => $message,
+            'data' => $data
+        ];
+        echo json_encode($data);
     }
 }

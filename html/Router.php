@@ -4,6 +4,7 @@
 namespace App;
 
 use Exception;
+use Models\Model;
 
 class Router
 {
@@ -16,7 +17,7 @@ class Router
 
     public function delegate()
     {
-        $pattern = '/^\/(\w+)?\/(\w+)$/';
+        $pattern = '/^\/?(\w+)[\?\/]?(\w+)?\??$/';
         preg_match_all($pattern, $this->path, $matches);
         $controller = $matches[1][0] ? ucfirst($matches[1][0]) : 'Index';
         $controller .= 'Controller';
@@ -28,8 +29,9 @@ class Router
             $className = $namespace . $controller;
             $controller = new $className($_GET, $_POST);
             if (!is_callable([$controller, $action])) {
-                throw new Exception('Not found');
+                throw new Exception('Not found ' . $action . " in $className" , 400);
             }
+            Model::initConnection();
             $controller->$action();
         }
     }

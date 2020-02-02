@@ -14,17 +14,11 @@
 <main>
     <div class="login-block">
         <h1 id="data">Введите свои данные</h1>
-        <form action="user/create" name="data" enctype="multipart/form-data" method="post" onclick="return formValidation();">
-            <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input id="login" type="text" class="form-control" placeholder="Логин" required>
-                </div>
-            </div>
+        <form action="" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-                    <input id="password" type="password" class="form-control" placeholder="Пароль" required>
+                    <input id="password" name="password" type="password" class="form-control" placeholder="Пароль" required>
                 </div>
             </div>
             <div class="form-group">
@@ -36,19 +30,19 @@
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input id="name" type="text" class="form-control" placeholder="Имя" required>
+                    <input id="name" name="name" type="text" class="form-control" placeholder="Имя" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input id="surname" type="text" class="form-control" placeholder="Фамилия" required>
+                    <input id="surname" name="surname" type="text" class="form-control" placeholder="Фамилия" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input id="email" type="text" class="form-control" placeholder="Email">
+                    <input id="email" name="email" type="text" class="form-control" placeholder="Email" required>
                 </div>
             </div>
             <div class="form-group">
@@ -57,16 +51,16 @@
                         <span class="input-group-addon"><i class="fa fa-picture-o"></i></span>
                     </div>
                     <div class="custom-file">
-                        <input name="file" type="file" class="custom-file-input" id="inputGroupFile" accept="image/jpeg,image/gif,image/png">
-                        <label class="custom-file-label" for="inputGroupFile">Загрузите свою фотографию</label>
+                        <input id="uploadImage" type="file" class="custom-file-input" accept="image/jpeg" onchange="uploadLabel()">
+                        <label class="custom-file-label" id="uploadLabel" for="uploadImage">Загрузите свою фотографию</label>
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary btn-block register" type="submit">Зарегистрироваться</button>
+            <input class="btn btn-primary btn-block register" type="submit" id="send" value="Зарегистрироваться" onclick="return formValidation();">
         </form>
     </div>
 </main>
+<script src="../views/js/registration.js"></script>
 
-<script src="/views/js/registration.js"></script>
 </body>
 </html>

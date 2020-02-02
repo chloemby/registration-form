@@ -10,6 +10,6 @@ class Config
 
     public function __construct()
     {
-        self::$config = parse_ini_file('../config.ini');
+        self::$config = parse_ini_file('config.ini');
     }
 }
