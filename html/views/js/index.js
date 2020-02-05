@@ -1,33 +1,38 @@
 $(document).ready(function () {
     $('#signin').click(function () {
-
-        $.ajax({
-            url: "auth",
+        let password = document.getElementById('password');
+        let login = document.getElementById('login');
+        if (password.value.length < 8) {
+            alert('Минимальная длина пароля - 8 символов');
+            return false;
+        }
+        if (login.value.length === 0) {
+            alert('Email не может быть пустым!');
+            login.focus();
+            return false;
+        }
+        if (password.value.length === 0) {
+            alert('Пароль не может быть пустым!');
+            password.focus();
+            return false;
+        }
+        var data = {
+            'password': password.value,
+            'email': login.value
+        };
+        var result =  $.ajax({
+            url: "user/auth",
             dataType: "json",
             method: "POST",
-            data: {
-                'password': password,
-                'email': login,
-            },
-            success: function (data) {
-                console.log(data);
-                if (data.code === 200) {
-                } else {
-                    alert(data.message);
-                }
-            },
-            error: function (data) {
-                alert(data.message);
-                return fase;
-            },
-            beforeSend: function () {
-                login = document.getElementById('login');
-                password = document.getElementById('password');
-                if (login.value.length === 0 || password.value.length === 0) {
-                    alert('Invalid login/password');
-                }
-            }
-        });
-        return false;
-    })
+            async: false,
+            data: data
+        }).responseJSON;
+        if (result.status === 200) {
+            localStorage.setItem('data', JSON.stringify(result.data));
+            return true;
+        } else {
+            alert(result.message);
+            return false;
+        }
+    });
 });

@@ -11,7 +11,7 @@ class User extends Model
     public $surname = '';
     public $email = '';
     public $password = '';
-    public $image = null;
+    public $image = '';
     private $id = null;
 
     public function save()
@@ -33,7 +33,7 @@ class User extends Model
         $tableName = self::$tableName;
         $query = "insert into $tableName (name, surname, password, email, image) values (?, ?, ?, ?, ?)";
         $stmt = self::$connection->prepare($query);
-        $stmt->bind_param('ssssb', $this->name, $this->surname, $this->password, $this->email, $this->image);
+        $stmt->bind_param('sssss', $this->name, $this->surname, $this->password, $this->email, $this->image);
         $stmt->execute();
         $this->id = $stmt->insert_id;
         if ($this->id == 0) {

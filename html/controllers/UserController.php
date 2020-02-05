@@ -27,38 +27,48 @@ class UserController extends BaseController
             $name = $this->getPost('name');
             $surname = $this->getPost('surname');
             $email = $this->getPost('email');
-            $files = $this->getUploadedFiles();
+            $image = $this->getUploadedFiles('image');
             $user = new User;
             if (!isset($password) || !isset($name) || !isset($surname) || !isset($email)) {
-                throw new Exception('Invalid data ' . $password, 400);
+                throw new Exception('Некорректные данные', 400);
             }
             if (strlen($password) < 8) {
-                throw new Exception('Password cant be shorter than 8 symbols!', 400);
+                throw new Exception('Пароль не может быть короче 8 символов!', 400);
             }
             if (strlen($name) == 0) {
-                throw new Exception('Invalid name' . $name, 400);
+                throw new Exception('Некорректное имя ' . $name, 400);
             }
             if (strlen($surname) == 0) {
-                throw new Exception('Invalid surname' . $surname, 400);
+                throw new Exception('Некорректная фамилия ' . $surname, 400);
             }
             $pattern = '/(\w+)@\w+\.\w+/';
             if (!preg_match($pattern, $email)) {
-                throw new Exception('Invalid email ' . $email, 400);
+                throw new Exception('Некорректный email: ' . $email, 400);
             }
-            if (count($files) > 1 || !isset($files['image'])) {
-                throw new Exception('Invalid image', 400);
+            if ($image != null) {
+                chdir('images');
+                if (!move_uploaded_file($image['tmp_name'], $image['name'])) {
+                    throw new Exception('Файл не может быть загружен!', 400);
+                }
+                $image = 'images/' . $image['name'];
             }
-            $image = file_get_contents($files['image']['tmp_name']);
             $user->name = $name;
             $user->surname = $surname;
             $password = password_hash($password, PASSWORD_DEFAULT);
             $user->email = $email;
             $user->password = $password;
             $user->image = $image;
-            $result = $user->save();
-            if ($result == 0) {
-                throw new Exception('User with your data already exist', 400);
+            $id = $user->save();
+            if (!$id) {
+                throw new Exception('Пользователь с такими данными уже существует', 400);
             }
+            $result = [
+                'id' => $id,
+                'email' => $user->email,
+                'name' => $user->name,
+                'surname' => $user->surname,
+                'image' => $user->image
+            ];
             $this->sendResponse(200, 'OK', $result);
         } catch (Exception $e) {
             $this->sendResponse($e->getCode(), $e->getMessage());
@@ -71,11 +81,11 @@ class UserController extends BaseController
             $email = $this->getPost('email');
             $password = $this->getPost('password');
             if (strlen($email) == 0 || strlen($password) == 0) {
-                throw new Exception('Invalid login/password combination', 400);
+                throw new Exception('Логин/пароль не может быть пустым', 400);
             }
             $user = User::confirm($email, $password);
             if (!$user) {
-                throw new Exception('Invalid login/password combination', 400);
+                throw new Exception('Неверная комбинация логин/пароль', 400);
             }
             $response = [
                 'id' => $user->getId(),

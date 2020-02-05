@@ -31,12 +31,12 @@ abstract class BaseController
         return $defaultValue;
     }
 
-    public function getUploadedFiles()
+    public function getUploadedFiles(string $name, $defaultValue = null)
     {
-        if (isset($_FILES) || count($_FILES) > 0) {
-            return $_FILES;
+        if (isset($_FILES[$name])) {
+            return $_FILES[$name];
         }
-        return null;
+        return $defaultValue;
     }
 
     public function view($viewName, $data = [])

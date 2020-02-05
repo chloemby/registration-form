@@ -13,7 +13,13 @@ function formValidation()
     let surname = document.getElementById('surname');
     let name = document.getElementById('name');
     let email = document.getElementById('email');
-    let image = document.getElementById('uploadImage');
+    let image = document.getElementById('uploadImage').files[0];
+    formData = new FormData();
+    formData.append('password', password.value);
+    formData.append('surname', surname.value);
+    formData.append('name', name.value);
+    formData.append('email', email.value);
+    formData.append('image', image);
     if (password.value !== confirmPassword.value) {
         alert('Пароли не совпадают!');
         confirmPassword.focus();
@@ -24,28 +30,36 @@ function formValidation()
         password.focus();
         return false;
     }
-    $.ajax({
+    if (email.value.length === 0) {
+        alert('Email не может быть пустым!');
+        email.focus();
+        return false;
+    }
+    if (name.value.length === 0 || surname.value.length === 0) {
+        alert('Имя и фамилия должны быть заполнены!');
+        name.focus();
+        return false;
+    }
+    var response = $.ajax({
         url: "create",
         dataType: "json",
         method: "POST",
-        data: {
-            'password': password,
-            'surname': surname,
-            'email': email,
-            'name': name,
-            'files': image
-        },
-        success : function (data) {
-            if (data.code === 200) {
-                return true;
-            } else {
-                alert(data.message);
-                return false;
-            }
-        },
-        error: function (data) {
-            alert(data.message);
-            return false;
-        }
-    });
+        processData: false,
+        contentType: false,
+        async: false,
+        data: formData
+    }).responseJSON;
+    if (response.status === 200) {
+        let data = {
+            'name': response.data.name,
+            'surname': response.data.surname,
+            'email': response.data.email,
+            'image': response.data.image
+        };
+        localStorage.setItem('data', JSON.stringify(data));
+        return true;
+    } else {
+        alert(response.message);
+        return false;
+    }
 }
