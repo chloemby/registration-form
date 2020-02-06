@@ -21,6 +21,7 @@
         ]
     },
     "require": {
-        "twbs/bootstrap" : "4.4.1"
+        "twbs/bootstrap" : "4.4.1",
+        "dg/mysql-dump" :  "1.5.1"
     }
 }
