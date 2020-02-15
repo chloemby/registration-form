@@ -13,28 +13,37 @@
 <body class="login-page">
 <main>
     <div class="login-block">
-        <h1 id="data">Введите свои данные</h1>
+        <h1 id="data" class="lang">Input your data</h1>
         <form action="user" name="auth" method="post">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input id="login" type="text" class="form-control" placeholder="Логин" required>
+                    <input id="login" type="text" class="form-control lang" placeholder="Email" required>
                 </div>
             </div>
             <hr class="hr-xs">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-                    <input id="password" type="password" class="form-control" placeholder="Пароль" required>
+                    <input id="password" type="password" class="form-control lang" placeholder="Password" required>
                 </div>
             </div>
-            <button class="btn btn-primary btn-block" id="signin" type="submit">Войти</button>
+            <button class="btn btn-primary btn-block lang" id="signin" type="submit">Sign in</button>
         </form>
         <div class="login-links">
-            <a href="user/registration"><button class="btn btn-primary btn-block register" type="submit">Регистрация</button></a>
+            <a href="user/registration"><button class="btn btn-primary btn-block register lang" type="submit">Sign up</button></a>
+        </div>
+        <div class="btn-group btn-group-toggle mt-3" data-toggle="buttons">
+            <label class="btn btn-secondary">
+                <button class="btn btn-primary" id="rus">Русский</button>
+            </label>
+            <label class="btn btn-secondary">
+                <button class="btn btn-primary" id="eng">English</button>
+            </label>
         </div>
     </div>
 </main>
 <script src="../views/js/index.js"></script>
+<script src="../views/js/language.js"></script>
 </body>
 </html>

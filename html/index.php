@@ -15,9 +15,10 @@ $router = new Router($request);
 try {
     $router->delegate();
 } catch (Exception $e) {
+    http_response_code($e->getCode());
     $response = [
         'status' => $e->getCode(),
-        'message' => $e->getMessage()
+        'message' => 'Sorry, something went wrong'
     ];
     echo json_encode($response);
 }

@@ -44,9 +44,9 @@ abstract class BaseController
         $dir = 'views/';
         $filename = $dir . $viewName . '.html';
         if (!file_exists($filename)) {
-            include $dir . 'NotFound.html';
+            require $dir . 'NotFound.html';
         } else {
-            include $filename;
+            require $filename;
         }
     }
 

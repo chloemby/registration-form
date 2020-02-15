@@ -20,5 +20,6 @@ abstract class Model
 
     public static function initConnection() {
         self::$connection = Database::getConnection();
+        return self::$connection;
     }
 }

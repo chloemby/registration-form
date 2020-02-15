@@ -2,36 +2,45 @@ $(document).ready(function () {
     $('#signin').click(function () {
         let password = document.getElementById('password');
         let login = document.getElementById('login');
+        let translation = JSON.parse(localStorage.getItem('translation'));
         if (password.value.length < 8) {
-            alert('Минимальная длина пароля - 8 символов');
-            return false;
-        }
-        if (login.value.length === 0) {
-            alert('Email не может быть пустым!');
-            login.focus();
-            return false;
-        }
-        if (password.value.length === 0) {
-            alert('Пароль не может быть пустым!');
+            let error_message = translation['error_401'];
+            alert(error_message);
             password.focus();
             return false;
         }
-        var data = {
+        if (login.value.length === 0) {
+            let error_message = translation['error_408'];
+            alert(error_message);
+            login.focus();
+            return false;
+        }
+        let data = {
             'password': password.value,
             'email': login.value
         };
-        var result =  $.ajax({
+        let result =  $.ajax({
             url: "user/auth",
             dataType: "json",
             method: "POST",
             async: false,
             data: data
         }).responseJSON;
+        if (result === undefined) {
+            window.location.href = 'error';
+            return false;
+        }
         if (result.status === 200) {
             localStorage.setItem('data', JSON.stringify(result.data));
-            return true;
+            return false;
         } else {
-            alert(result.message);
+            if (result.status === 500) {
+                window.location.href = 'error';
+                return false;
+            } else {
+                let error_message = translation['error_' + result.status.toString()];
+            }
+            alert(error_message);
             return false;
         }
     });

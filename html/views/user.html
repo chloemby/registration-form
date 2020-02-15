@@ -14,7 +14,7 @@
 <body>
 <div class="container">
     <div class="nav navbar">
-        <h1>Страница пользователя</h1>
+        <h1 class="lang">User page</h1>
     </div>
     <div class="login-block container">
         <div class="row">
@@ -29,9 +29,20 @@
                 <h3 id="email"></h3>
                 <hr class="hr-xs">
             </div>
+            <div class="col-md-3">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <button class="btn btn-primary" id="rus">Русский</button>
+                        </label>
+                        <label class="btn btn-secondary">
+                            <button class="btn btn-primary" id="eng">English</button>
+                        </label>
+                    </div>
+            </div>
         </div>
     </div>
 </div>
 <script src="/views/js/user.js"></script>
+<script src="../views/js/language.js"></script>
 </body>
 </html>

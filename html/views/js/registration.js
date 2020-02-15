@@ -2,8 +2,7 @@ function uploadLabel() {
     let label = document.getElementById('uploadLabel');
     let imagePath = document.getElementById('uploadImage').value;
     let tokens = imagePath.split('\\');
-    let filename = tokens[tokens.length - 1];
-    label.innerText = filename;
+    label.innerText = tokens[tokens.length - 1];
 }
 
 function formValidation()
@@ -14,29 +13,34 @@ function formValidation()
     let name = document.getElementById('name');
     let email = document.getElementById('email');
     let image = document.getElementById('uploadImage').files[0];
-    formData = new FormData();
+    let translation = JSON.parse(localStorage.getItem('translation'));
+    let formData = new FormData();
     formData.append('password', password.value);
     formData.append('surname', surname.value);
     formData.append('name', name.value);
     formData.append('email', email.value);
     formData.append('image', image);
     if (password.value !== confirmPassword.value) {
-        alert('Пароли не совпадают!');
+        let error_message = translation['error_409'];
+        alert(error_message);
         confirmPassword.focus();
         return false;
     }
     if (password.value.length < 8) {
-        alert('Длина пароля должна быть больше 8 символов!');
+        let error_message = translation['error_401'];
+        alert(error_message);
         password.focus();
         return false;
     }
     if (email.value.length === 0) {
-        alert('Email не может быть пустым!');
+        let error_message = translation['error_408'];
+        alert(error_message);
         email.focus();
         return false;
     }
     if (name.value.length === 0 || surname.value.length === 0) {
-        alert('Имя и фамилия должны быть заполнены!');
+        let error_message = translation['error_410'];
+        alert(error_message);
         name.focus();
         return false;
     }
@@ -49,6 +53,10 @@ function formValidation()
         async: false,
         data: formData
     }).responseJSON;
+    if (!response) {
+        window.location.href = 'error';
+        return false;
+    }
     if (response.status === 200) {
         let data = {
             'name': response.data.name,
@@ -58,8 +66,17 @@ function formValidation()
         };
         localStorage.setItem('data', JSON.stringify(data));
         return true;
+    } if (response.status === 200) {
+        localStorage.setItem('data', JSON.stringify(response.data));
+        return true;
     } else {
-        alert(response.message);
+        if (response.status === 500) {
+            window.location.href = 'error';
+            return false;
+        } else {
+            let error_message = translation['error_' + response.status.toString()];
+            alert(error_message);
+        }
         return false;
     }
 }

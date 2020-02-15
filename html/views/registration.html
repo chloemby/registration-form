@@ -4,45 +4,50 @@
     <meta charset="UTF-8">
     <title>Регистрация</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/views/styles/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../views/styles/style.css">
+    <link rel="stylesheet" href="../views/styles/style.css">
 </head>
 <body class="login-page">
 <main>
     <div class="login-block">
-        <h1 id="data">Введите свои данные</h1>
+        <h1 id="data" class="lang">Input your data</h1>
         <form action="/user" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-                    <input id="password" name="password" type="password" class="form-control" placeholder="Пароль" required>
+                    <input id="password" name="password" type="password" class="form-control lang" placeholder="Password" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock ti-unlock"></i></span>
-                    <input id="confirmPassword" type="password" class="form-control" placeholder="Введите пароль еще раз" required>
+                    <input id="confirmPassword" type="password" class="form-control lang" placeholder="Password again" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input id="name" name="name" type="text" class="form-control" placeholder="Имя" required>
+                    <input id="name" name="name" type="text" class="form-control lang" placeholder="Name" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input id="surname" name="surname" type="text" class="form-control" placeholder="Фамилия" required>
+                    <input id="surname" name="surname" type="text" class="form-control lang" placeholder="Surname" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-user ti-user"></i></span>
-                    <input id="email" name="email" type="text" class="form-control" placeholder="Email" required>
+                    <input id="email" name="email" type="text" class="form-control lang" placeholder="Email" required>
                 </div>
             </div>
             <div class="form-group">
@@ -52,15 +57,23 @@
                     </div>
                     <div class="custom-file">
                         <input id="uploadImage" type="file" class="custom-file-input" accept="image/jpeg" onchange="uploadLabel()">
-                        <label class="custom-file-label" id="uploadLabel" for="uploadImage">Загрузите свою фотографию</label>
+                        <label class="custom-file-label lang" id="uploadLabel" for="uploadImage">Upload photo</label>
                     </div>
                 </div>
             </div>
-            <input class="btn btn-primary btn-block register" type="submit" id="send" value="Зарегистрироваться" onclick="return formValidation();">
+            <input class="btn btn-primary btn-block register lang" type="submit" id="send" value="Sign up" onclick="return formValidation();">
         </form>
+        <div class="btn-group btn-group-toggle pt-5" data-toggle="buttons">
+            <label class="pr-3">
+                <button class="btn btn-primary" id="rus">Русский</button>
+            </label>
+            <label class="pl-3">
+                <button class="btn btn-primary" id="eng">English</button>
+            </label>
+        </div>
     </div>
 </main>
 <script src="../views/js/registration.js"></script>
-
+<script src="../views/js/language.js"></script>
 </body>
 </html>

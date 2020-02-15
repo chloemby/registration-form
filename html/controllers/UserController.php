@@ -33,22 +33,22 @@ class UserController extends BaseController
                 throw new Exception('Некорректные данные', 400);
             }
             if (strlen($password) < 8) {
-                throw new Exception('Пароль не может быть короче 8 символов!', 400);
+                throw new Exception('Пароль не может быть короче 8 символов!', 401);
             }
             if (strlen($name) == 0) {
-                throw new Exception('Некорректное имя ' . $name, 400);
+                throw new Exception('Некорректное имя ' . $name, 402);
             }
             if (strlen($surname) == 0) {
-                throw new Exception('Некорректная фамилия ' . $surname, 400);
+                throw new Exception('Некорректная фамилия ' . $surname, 403);
             }
             $pattern = '/(\w+)@\w+\.\w+/';
             if (!preg_match($pattern, $email)) {
-                throw new Exception('Некорректный email: ' . $email, 400);
+                throw new Exception('Некорректный email: ' . $email, 404);
             }
             if ($image != null) {
                 chdir('images');
                 if (!move_uploaded_file($image['tmp_name'], $image['name'])) {
-                    throw new Exception('Файл не может быть загружен!', 400);
+                    throw new Exception('Файл не может быть загружен!', 405);
                 }
                 $image = 'images/' . $image['name'];
             }
@@ -60,7 +60,7 @@ class UserController extends BaseController
             $user->image = $image;
             $id = $user->save();
             if (!$id) {
-                throw new Exception('Пользователь с такими данными уже существует', 400);
+                throw new Exception('Пользователь с такими данными уже существует', 406);
             }
             $result = [
                 'id' => $id,
@@ -85,7 +85,7 @@ class UserController extends BaseController
             }
             $user = User::confirm($email, $password);
             if (!$user) {
-                throw new Exception('Неверная комбинация логин/пароль', 400);
+                throw new Exception('Неверная комбинация логин/пароль', 407);
             }
             $response = [
                 'id' => $user->getId(),
